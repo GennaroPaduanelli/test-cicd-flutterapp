@@ -2,7 +2,7 @@ name: Build Angular App and Deploy on Firebase for Sfof
 on:
   push:
     branches:
-      - refactor
+      - main
 
 jobs:
   build:
