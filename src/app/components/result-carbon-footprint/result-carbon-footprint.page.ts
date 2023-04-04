@@ -1,0 +1,429 @@
+import { Component } from '@angular/core';
+
+import { NavController } from '@ionic/angular';
+import {
+  Misurazione,
+  MisurazioneService,
+} from 'src/app/services/misurazione.service';
+
+@Component({
+  selector: 'app-result-carbon-footprint',
+  templateUrl: './result-carbon-footprint.page.html',
+  styleUrls: ['./result-carbon-footprint.page.scss'],
+})
+export class ResultCarbonFootprintPage {
+  misurazione!: Misurazione;
+
+  sommaCfpUrLavorazioni!: string;
+  sommaCfpUrAltreLavorazioni!: string;
+  sommaCfpUrPesticidi!: string;
+  sommaCfpUrFertilizzanti!: string;
+  sommaCfpUrResidui!: string;
+  sommaCfpUrEmissioniAltreAttivita!: string;
+
+  percentualeCfpLavorazioni!: string;
+  percentualeCfpAltreLavorazioni!: string;
+  percentualeCfpPesticidi!: string;
+  percentualeCfpFertilizzanti!: string;
+  percentualeCfpResidui!: string;
+  percentualeCfpEmissioniAltreAttivita!: string;
+
+  totaleCfpUr!: string;
+
+  pagliaAlSuoloKgEttaro!: string;
+  resaGranellaSeccaKgEttaro!: string;
+  proteineGranellaSeccaKgEttaro!: string;
+
+  kgCo2Ettaro!: string;
+  kgCo2PerKgGranella!: string;
+  kgCo2PerKgProteina!: string;
+  kgCo2PerKgAllocazioneGranella!: string;
+  asoc!: string;
+  systemExspansion!: string;
+
+  isSecondPage = false;
+
+  constructor(
+    private misurazioneService: MisurazioneService,
+    private navCtrl: NavController
+  ) {
+    this.misurazione = misurazioneService.getMisurazioneLocalStorage()!;
+
+    console.log(this.misurazione);
+  }
+
+  ionViewWillEnter() {
+    this.setDataOut();
+  }
+  setDataOut() {
+    if (
+      this.misurazione.inputMisurazione.operazioniColturali &&
+      this.misurazione.inputMisurazione.residuiColturali &&
+      this.misurazione.inputMisurazione.residuiColturali.granellaKgEttaro &&
+      this.misurazione.inputMisurazione.residuiColturali.percentualeUmidita &&
+      this.misurazione.inputMisurazione.residuiColturali.pagliaRimossaKgEttaro
+    ) {
+      if (
+        this.misurazione.inputMisurazione.operazioniColturali.lavorazioni
+          .length > 0
+      ) {
+        this.sommaCfpUrLavorazioni =
+          this.misurazione.inputMisurazione.operazioniColturali.lavorazioni
+            .map((x) => parseFloat(x.kgCo2Ettaro))
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            )
+            .toFixed(3).toString();
+      } else {
+        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+      }
+
+      if (
+        this.misurazione.inputMisurazione.operazioniColturali.altreLavorazioni
+          .length > 0
+      ) {
+        this.sommaCfpUrAltreLavorazioni =
+          this.misurazione.inputMisurazione.operazioniColturali.altreLavorazioni
+            .map((x) => parseFloat(x.co2Ettaro))
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            )
+            .toString();
+      } else {
+        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+      }
+
+      if (
+        this.misurazione.inputMisurazione.operazioniColturali.pesticidi.length >
+        0
+      ) {
+        this.sommaCfpUrPesticidi =
+          this.misurazione.inputMisurazione.operazioniColturali.pesticidi
+            .map((x) => parseFloat(x.co2Ettaro))
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            )
+            .toString();
+      } else {
+        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+      }
+
+      if (
+        this.misurazione.inputMisurazione.operazioniColturali.fertilizzanti
+          .length > 0
+      ) {
+        this.sommaCfpUrFertilizzanti =
+          this.misurazione.inputMisurazione.operazioniColturali.fertilizzanti
+            .map((x) => parseFloat(x.co2Ettaro))
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            )
+            .toString();
+      } else {
+        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+      }
+
+      if (
+        this.misurazione.inputMisurazione.residuiColturali &&
+        this.misurazione.inputMisurazione.residuiColturali.emissioniN2OKgAnno &&
+        this.misurazione.inputMisurazione.residuiColturali.emissioniN2OKgAnno !=
+          0
+      ) {
+        this.sommaCfpUrResidui = (
+          this.misurazione.inputMisurazione.residuiColturali
+            .emissioniN2OKgAnno * 298
+        )
+          .toFixed(3)
+          .toString();
+      } else {
+        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+      }
+      if (
+        this.misurazione.inputMisurazione.operazioniColturali
+          .emissioniAltreAttivita.length > 0
+      ) {
+        this.sommaCfpUrEmissioniAltreAttivita =
+          this.misurazione.inputMisurazione.operazioniColturali.emissioniAltreAttivita
+            .map((x) => parseFloat(x.kgCo2Ettaro))
+            .reduce(
+              (accumulator, currentValue) => accumulator + currentValue,
+              0
+            )
+            .toString();
+      } else {
+        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+      }
+
+      if (
+        this.sommaCfpUrLavorazioni &&
+        this.sommaCfpUrAltreLavorazioni &&
+        this.sommaCfpUrPesticidi &&
+        this.sommaCfpUrFertilizzanti &&
+        this.sommaCfpUrResidui &&
+        this.sommaCfpUrEmissioniAltreAttivita
+      ) {
+        this.totaleCfpUr = (
+          parseFloat(this.sommaCfpUrLavorazioni) +
+          parseFloat(this.sommaCfpUrAltreLavorazioni) +
+          parseFloat(this.sommaCfpUrPesticidi) +
+          parseFloat(this.sommaCfpUrFertilizzanti) +
+          parseFloat(this.sommaCfpUrResidui) +
+          parseFloat(this.sommaCfpUrEmissioniAltreAttivita)
+        )
+          .toFixed(3)
+          .toString();
+      } else {
+        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+      }
+
+      if (this.totaleCfpUr && this.totaleCfpUr != 'Non Calcolabile') {
+        if (
+          this.sommaCfpUrLavorazioni &&
+          this.sommaCfpUrLavorazioni != 'Non Calcolabile'
+        ) {
+          this.percentualeCfpLavorazioni = (
+            (100 * parseFloat(this.sommaCfpUrLavorazioni)) /
+            parseFloat(this.totaleCfpUr)
+          )
+            .toFixed(2)
+            .toString();
+        } else {
+          this.percentualeCfpLavorazioni = 'Non Calcolabile';
+        }
+
+        if (
+          this.sommaCfpUrAltreLavorazioni &&
+          this.sommaCfpUrAltreLavorazioni != 'Non Calcolabile'
+        ) {
+          this.percentualeCfpAltreLavorazioni = (
+            (100 * parseFloat(this.sommaCfpUrAltreLavorazioni)) /
+            parseFloat(this.totaleCfpUr)
+          )
+            .toFixed(2)
+            .toString();
+        } else {
+          this.percentualeCfpAltreLavorazioni = 'Non Calcolabile';
+        }
+
+        if (
+          this.sommaCfpUrPesticidi &&
+          this.sommaCfpUrPesticidi != 'Non Calcolabile'
+        ) {
+          this.percentualeCfpPesticidi = (
+            (100 * parseFloat(this.sommaCfpUrPesticidi)) /
+            parseFloat(this.totaleCfpUr)
+          )
+            .toFixed(2)
+            .toString();
+        } else {
+          this.percentualeCfpPesticidi = 'Non Calcolabile';
+        }
+
+        if (
+          this.sommaCfpUrFertilizzanti &&
+          this.sommaCfpUrFertilizzanti != 'Non Calcolabile'
+        ) {
+          this.percentualeCfpFertilizzanti = (
+            (100 * parseFloat(this.sommaCfpUrFertilizzanti)) /
+            parseFloat(this.totaleCfpUr)
+          )
+            .toFixed(2)
+            .toString();
+        } else {
+          this.percentualeCfpFertilizzanti = 'Non Calcolabile';
+        }
+
+        if (
+          this.sommaCfpUrResidui &&
+          this.sommaCfpUrResidui != 'Non Calcolabile'
+        ) {
+          this.percentualeCfpResidui = (
+            (100 * parseFloat(this.sommaCfpUrResidui)) /
+            parseFloat(this.totaleCfpUr)
+          )
+            .toFixed(2)
+            .toString();
+        } else {
+          this.percentualeCfpResidui = 'Non Calcolabile';
+        }
+
+        if (
+          this.sommaCfpUrEmissioniAltreAttivita &&
+          this.sommaCfpUrEmissioniAltreAttivita != 'Non Calcolabile'
+        ) {
+          this.percentualeCfpEmissioniAltreAttivita = (
+            (100 * parseFloat(this.sommaCfpUrEmissioniAltreAttivita)) /
+            parseFloat(this.totaleCfpUr)
+          )
+            .toFixed(2)
+            .toString();
+        } else {
+          this.percentualeCfpEmissioniAltreAttivita = 'Non Calcolabile';
+        }
+      }
+
+      if (
+        this.misurazione.inputMisurazione.residuiColturali.residuiTotaliAlSuolo
+      ) {
+        this.pagliaAlSuoloKgEttaro =
+          this.misurazione.inputMisurazione.residuiColturali.residuiTotaliAlSuolo
+            .toFixed(3)
+            .toString();
+      } else {
+        this.pagliaAlSuoloKgEttaro = 'Non Calcolabile';
+      }
+
+      if (
+        this.misurazione.inputMisurazione.datiProduttivi
+          .datiProduttiviCarbonFootPrint &&
+        this.misurazione.inputMisurazione.datiProduttivi
+          .datiProduttiviCarbonFootPrint.resaGranellaKgEttaro &&
+        this.misurazione.inputMisurazione.datiProduttivi
+          .datiProduttiviCarbonFootPrint.percentualeUmiditaGranella
+      ) {
+        this.resaGranellaSeccaKgEttaro = (
+          this.misurazione.inputMisurazione.datiProduttivi
+            .datiProduttiviCarbonFootPrint.resaGranellaKgEttaro *
+          ((100 -
+            this.misurazione.inputMisurazione.datiProduttivi
+              .datiProduttiviCarbonFootPrint.percentualeUmiditaGranella) /
+            100)
+        )
+          .toFixed(3)
+          .toString();
+      } else {
+        this.resaGranellaSeccaKgEttaro = 'Non Calcolabile';
+      }
+
+      if (
+        this.resaGranellaSeccaKgEttaro &&
+        this.resaGranellaSeccaKgEttaro != 'Non Calcolabile'
+      ) {
+        this.proteineGranellaSeccaKgEttaro = (
+          (parseFloat(this.resaGranellaSeccaKgEttaro) *
+            this.misurazione.inputMisurazione.datiProduttivi
+              .datiProduttiviCarbonFootPrint.percentualeUmiditaGranella) /
+          100
+        )
+          .toFixed(3)
+          .toString();
+      } else {
+        this.proteineGranellaSeccaKgEttaro = 'Non Calcolabile';
+      }
+
+      if (this.totaleCfpUr && this.totaleCfpUr != 'Non Calcolabile') {
+        this.kgCo2Ettaro = this.totaleCfpUr;
+      } else {
+        this.kgCo2Ettaro = 'Non Calcolabile';
+      }
+
+      if (
+        this.kgCo2Ettaro &&
+        this.kgCo2Ettaro != 'Non Calcolabile' &&
+        this.resaGranellaSeccaKgEttaro &&
+        this.resaGranellaSeccaKgEttaro != 'Non Calcolabile'
+      ) {
+        this.kgCo2PerKgGranella = (
+          parseFloat(this.kgCo2Ettaro) /
+          parseFloat(this.resaGranellaSeccaKgEttaro)
+        )
+          .toFixed(3)
+          .toString();
+      } else {
+        this.kgCo2PerKgGranella = 'Non Calcolabile';
+      }
+
+      if (
+        this.kgCo2Ettaro &&
+        this.kgCo2Ettaro != 'Non Calcolabile' &&
+        this.proteineGranellaSeccaKgEttaro &&
+        this.proteineGranellaSeccaKgEttaro != 'Non Calcolabile'
+      ) {
+        this.kgCo2PerKgProteina = (
+          parseFloat(this.kgCo2Ettaro) /
+          parseFloat(this.proteineGranellaSeccaKgEttaro)
+        )
+          .toFixed(3)
+          .toString();
+      } else {
+        this.kgCo2PerKgProteina = 'Non Calcolabile';
+      }
+
+      if (
+        this.kgCo2PerKgGranella &&
+        this.kgCo2PerKgGranella != 'Non Calcolabile' &&
+        this.misurazione.inputMisurazione.residuiColturali.bgtotNumber
+      ) {
+        this.kgCo2PerKgAllocazioneGranella = (
+          parseFloat(this.kgCo2PerKgGranella) *
+          (parseFloat(this.resaGranellaSeccaKgEttaro) /
+            (parseFloat(
+              this.misurazione.inputMisurazione.residuiColturali.bgtotNumber.toFixed(
+                2
+              )
+            ) *
+              1000))
+        )
+          .toFixed(3)
+          .toString();
+      } else {
+        this.kgCo2PerKgProteina = 'Non Calcolabile';
+      }
+
+      if (
+        this.misurazione.inputMisurazione.datiSuolo &&
+        this.misurazione.inputMisurazione.datiSuolo.densitaApparente &&
+        this.misurazione.inputMisurazione.datiSuolo.sostanzaOrganica &&
+        this.misurazione.inputMisurazione.datiSuolo.profondita &&
+        this.pagliaAlSuoloKgEttaro &&
+        this.pagliaAlSuoloKgEttaro != 'Non Calcolabile'
+      ) {
+        this.asoc = (
+          this.misurazioneService.getDatiCarbonio(
+            this.misurazione.inputMisurazione.datiSuolo.densitaApparente,
+            this.misurazione.inputMisurazione.datiSuolo.sostanzaOrganica,
+            this.misurazione.inputMisurazione.datiSuolo.profondita,
+            parseFloat(this.pagliaAlSuoloKgEttaro)
+          ).co2SequenzaMedia50Anni * 1000
+        )
+          .toFixed(3)
+          .toString();
+      } else {
+        this.asoc = 'Non Calcolabile';
+      }
+
+      if (
+        this.kgCo2Ettaro &&
+        this.kgCo2Ettaro != 'Non Calcolabile' &&
+        this.misurazione.inputMisurazione.datiProduttivi
+          .datiProduttiviCarbonFootPrint.resaGranellaKgEttaro
+      ) {
+        this.systemExspansion = (
+          (parseFloat(this.kgCo2Ettaro) - parseFloat(this.asoc)) /
+          this.misurazione.inputMisurazione.datiProduttivi
+            .datiProduttiviCarbonFootPrint.resaGranellaKgEttaro
+        )
+          .toFixed(3)
+          .toString();
+      } else {
+        this.systemExspansion = 'Non Calcolabile';
+      }
+    }
+  }
+
+  nextPage() {
+    this.isSecondPage = true;
+  }
+
+  backPage() {
+    if (this.isSecondPage) {
+      this.isSecondPage = false;
+    } else {
+      this.navCtrl.navigateForward('home-input');
+    }
+  }
+}

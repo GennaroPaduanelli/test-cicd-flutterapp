@@ -1,0 +1,47 @@
+::ng-deep .menu-fixed {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+
+  top : 0px;
+
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+}
+
+::ng-deep .menu-absolute {
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+  background-color:rgb(33, 202, 84);
+
+  height: 50px;
+  z-index: 9999;
+
+  position: absolute;
+  width: 100%;
+
+
+
+}
+
+
+
+
+
+::ng-deep .menu-item-active {
+
+  background-color: rgba(11, 23, 136, 0.082);
+
+  pointer-events: none;
+}
+
+
+
+

@@ -1,0 +1,179 @@
+<div class="container">
+  <div class="form">
+    <h2 class="title">Carbon FootPrint</h2>
+    <br />
+
+    <div *ngIf="!isSecondPage">
+      <div class="p-field input-class">
+        <label for="sommaCfpUrLavorazioni" style="color: white"
+          >Lavorazioni CFP (UR) : {{sommaCfpUrLavorazioni}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="sommaCfpUrAltreLavorazioni" style="color: white"
+          >AltreLavorazioni CFP (UR) : {{sommaCfpUrAltreLavorazioni}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="sommaCfpUrPesticidi" style="color: white"
+          >Pesticidi CFP (UR) : {{sommaCfpUrPesticidi}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="sommaCfpUrFertilizzanti" style="color: white"
+          >Fertilizzanti CFP (UR) : {{sommaCfpUrFertilizzanti}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="sommaCfpUrResidui" style="color: white"
+          >Residui CFP (UR) : {{sommaCfpUrResidui}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="sommaCfpUrEmissioniAltreAttivita" style="color: white"
+          >Emissioni Altre Attività CFP(UR) :
+          {{sommaCfpUrEmissioniAltreAttivita}}</label
+        >
+      </div>
+      <br />
+      <hr />
+      <div class="p-field input-class">
+        <label for="percentualeCfpLavorazioni" style="color: white"
+          >Lavorazioni CFP % : {{percentualeCfpLavorazioni}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="percentualeCfpAltreLavorazioni" style="color: white"
+          >AltreLavorazioni CFP % : {{percentualeCfpAltreLavorazioni}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="percentualeCfpPesticidi" style="color: white"
+          >Pesticidi CFP % : {{percentualeCfpPesticidi}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="percentualeCfpFertilizzanti" style="color: white"
+          >Fertilizzanti CFP % : {{percentualeCfpFertilizzanti}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="percentualeCfpResidui" style="color: white"
+          >Residui CFP % : {{percentualeCfpResidui}}</label
+        >
+      </div>
+      <br />
+      <div class="p-field input-class">
+        <label for="percentualeCfpEmissioniAltreAttivita" style="color: white"
+          >Emissioni Altre Attività CFP % :
+          {{percentualeCfpEmissioniAltreAttivita}}</label
+        >
+      </div>
+      <br />
+      <hr />
+      <div class="p-field input-class">
+        <label for="totaleCfpUr" style="color: white"
+          >Totale CFP (UR) : {{totaleCfpUr}}</label
+        >
+      </div>
+      <br />
+    </div>
+
+    <div *ngIf="isSecondPage">
+      <div class="p-field input-class">
+        <label for="pagliaAlSuoloKgEttaro" style="color: white"
+          >Paglia Al suolo KgEttaro : {{pagliaAlSuoloKgEttaro}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="resaGranellaSeccaKgEttaro" style="color: white"
+          >Resa Granella Secca KgEttaro : {{resaGranellaSeccaKgEttaro}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="resaGranellaSeccaKgEttaro" style="color: white"
+          >Proteine Granella Secca KgEttaro :
+          {{proteineGranellaSeccaKgEttaro}}</label
+        >
+      </div>
+      <br />
+      <hr />
+      <div class="p-field input-class">
+        <label for="kgCo2Ettaro" style="color: white"
+          >Kg CO2 Ettaro : {{kgCo2Ettaro}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="kgCo2PerKgGranella" style="color: white"
+          >Kg CO2 Per Kg Granella : {{kgCo2PerKgGranella}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="kgCo2PerKgProteina" style="color: white"
+          >Kg CO2 Per Kg Proteina : {{kgCo2PerKgProteina}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="kgCo2PerKgAllocazioneGranella" style="color: white"
+          >Kg CO2 Per Kg Allocazione Granella :
+          {{kgCo2PerKgAllocazioneGranella}}</label
+        >
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="asoc" style="color: white">Asoc : {{asoc}}</label>
+      </div>
+      <br />
+
+      <div class="p-field input-class">
+        <label for="systemExspansion" style="color: white"
+          >System Exspansion : {{systemExspansion}}</label
+        >
+      </div>
+    </div>
+
+    <button
+      class="back-btn"
+      pButton
+      type="button"
+      icon="pi pi-arrow-left"
+      (click)="backPage()"
+    ></button>
+    <button
+      class="next-btn"
+      pButton
+      type="button"
+      icon="pi pi-arrow-right"
+      (click)="nextPage()"
+    ></button>
+  </div>
+</div>

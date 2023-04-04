@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="form">
+    <div class="title">Registrazione</div>
+    <div class="subtitle">Inserisci i dati registrazione</div>
+
+    <div class="input-container ic3">
+      <input id="azienda" class="input" [(ngModel)]="azienda" type="text" placeholder=" " />
+      <div class="cut"></div>
+      <label for="azienda" class="placeholder">Azienda</label>
+    </div>
+    <div class="input-container ic2">
+      <input id="nome" class="input" [(ngModel)]="nome" type="text" placeholder=" " />
+      <div class="cut cut-short"></div>
+      <label for="nome" class="placeholder">Nome</label>
+    </div>
+    <div class="input-container ic2">
+      <input id="cognome" class="input" [(ngModel)]="cognome" type="text" placeholder=" " />
+      <div class="cut cut-short"></div>
+      <label for="cognome" class="placeholder">Cognome</label>
+    </div>
+    <div class="input-container ic2">
+      <input id="email" class="input" type="text" [(ngModel)]="email" placeholder=" " />
+      <div class="cut cut-short"></div>
+      <label for="email" class="placeholder">Email</label>
+    </div>
+    <div class="input-container ic2">
+      <input id="password" class="input" [(ngModel)]="password" type="password" placeholder=" " />
+      <div class="cut cut-short"></div>
+      <label for="password" class="placeholder">Password</label>
+    </div>
+    <h2 style="color:red;text-align: center;" *ngIf="visibleValidationMessage" >{{validationMessage}}</h2>
+
+    <button type="text" class="submit" (click)="registrati()">Registrati</button><br>
+    <ion-spinner class="ion-spinner"  name="circular" color="secondary" *ngIf="visibleSpinner"></ion-spinner>
+
+
+  </div>
+  </div>

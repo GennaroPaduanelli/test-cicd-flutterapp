@@ -1,0 +1,68 @@
+#card {
+  margin-top: 16%;
+
+}
+.t-header {
+
+  font-size: 12px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  margin-left: 0px;
+
+
+}
+.container {
+  background-image: url("/assets/images/wallpaper.jpg");
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
+
+
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding: 0.7rem 0.7rem;
+}
+
+
+
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  padding: 0.2rem 0.2rem;
+}
+
+
+
+:host ::ng-deep .p-button.p-button-icon-only.p-button-rounded {
+  height: 3rem;
+  margin-top: 3px;
+}
+:host ::ng-deep .p-datatable .p-sortable-column .p-sortable-column-icon {
+  margin-left: 0.3rem;
+}
+
+:host ::ng-deep.p-toolbar {
+  height: 105px;
+
+
+}
+
+:host ::ng-deep .table{
+
+  width: 60%;
+
+}
+
+
+.title {
+  margin-top: -1.5rem;
+  padding-left: 3rem;
+  padding-bottom: 0;
+
+}
+.txt-search {
+
+  width: 190px;
+
+}
