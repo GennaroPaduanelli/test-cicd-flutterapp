@@ -1,24 +1,29 @@
 name: Build Angular App and Deploy on Firebase for Sfof
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  build:
+  firebase-deploy:
     name: Build & Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
+      - name: Setup Node
+        uses: actions/setup-node@master
+        with:
+          node-version: "18.15.0"
       - name: Install Dependencies
         run: npm install
       - name: Build
-        run: npm run build
+        run: npm run build:prod
       - name: Run Tests
         run: npm run test
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@v1.5.0
+        uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
         env:
