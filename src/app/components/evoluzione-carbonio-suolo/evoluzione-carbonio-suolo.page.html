@@ -4,8 +4,8 @@
 
 
       <div class=" input-class">
-        <label for="listaDensitaApparente"   style="color: white; margin-right: 50px;">Densità Apparente</label>&nbsp;
-        <p-dropdown  styleClass="input-styling" *ngIf="!isTextInputDensitaApparente" id="listaDensitaApparente" placeholder="Densità Apparente" [options]="listaDensitaApparente" [(ngModel)]="selectedDensitaApparenteDropDown" optionLabel="name"></p-dropdown>
+        <label for="listaDensitaApparente"   style="color: white; margin-right: 50px;">Tessitura (Densità Apparente)</label>&nbsp;
+        <p-dropdown  styleClass="input-styling" *ngIf="!isTextInputDensitaApparente" id="listaDensitaApparente" placeholder=" " [options]="listaDensitaApparente" [(ngModel)]="selectedDensitaApparenteDropDown" optionLabel="name"></p-dropdown>
         <p-inputNumber styleClass="input-styling" [showButtons]="true" *ngIf="isTextInputDensitaApparente" [step]="0.1" [maxFractionDigits]="1" [(ngModel)]="selectedDensitaApparenteInput" inputId="minmax" inputId="minmax" mode="decimal" [min]="0.9" [max]="1.7"> </p-inputNumber>
 
         <p-inputSwitch styleClass="switch-styling" inputId="textDensitàApparente" [(ngModel)]="isTextInputDensitaApparente" ></p-inputSwitch>
@@ -15,8 +15,8 @@
       <br />
 
       <div class="input-class">
-        <label for="listaSostanzeOrganiche"  style="color: white;">Sostanza Organica</label><br>
-        <p-dropdown  *ngIf="!isTextInputSostanzaOrganica" styleClass="input-styling" id="listaSostanzeOrganiche" placeholder="Sostanza Organica" [options]="listaSostanzeOrganiche" [(ngModel)]="selectedSostanzaOrganicaDropDown" optionLabel="name"></p-dropdown>
+        <label for="listaSostanzeOrganiche"  style="color: white;">Giudizio (Sostanza Organica)</label><br>
+        <p-dropdown  *ngIf="!isTextInputSostanzaOrganica" styleClass="input-styling" id="listaSostanzeOrganiche" placeholder=" " [options]="listaSostanzeOrganiche" [(ngModel)]="selectedSostanzaOrganicaDropDown" optionLabel="name"></p-dropdown>
         <p-inputNumber styleClass="input-styling" [showButtons]="true" *ngIf="isTextInputSostanzaOrganica" [step]="0.1" [maxFractionDigits]="1" [(ngModel)]="selectedSostanzaOrganicaInput" inputId="minmax" inputId="minmax" mode="decimal" [min]="0.6" [max]="3.2"> </p-inputNumber>
 
         <p-inputSwitch styleClass="switch-styling" inputId="sostanzaOrganica" [(ngModel)]="isTextInputSostanzaOrganica"></p-inputSwitch>
@@ -39,7 +39,7 @@
 
 
 
-    <button class="back-btn" pButton type="button" icon="pi pi-arrow-left" routerLink="/home-input" (click)="onBack()" ></button>
+    <button class="back-btn" pButton type="button" icon="pi pi-arrow-right" routerLink="/home-input" (click)="onBack()" ></button>
 
   </div>
 </div>

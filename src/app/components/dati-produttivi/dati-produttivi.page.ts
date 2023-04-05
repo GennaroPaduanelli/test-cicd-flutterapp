@@ -116,10 +116,52 @@ export class DatiProduttiviPage implements OnInit {
 
 
 
-      this.misurazione.inputMisurazione.datiProduttivi = this.datiProduttivi;
+
+
+      let resultUpdating = false;
+
+      if(this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviCarbonFootPrint.resaGranellaKgEttaro !=  this.datiProduttivi.datiProduttiviCarbonFootPrint.resaGranellaKgEttaro) {
+        this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviCarbonFootPrint.resaGranellaKgEttaro  = this.datiProduttivi.datiProduttiviCarbonFootPrint.resaGranellaKgEttaro;
+        resultUpdating = true;
+      }else {
+        resultUpdating = false;
+      }
+
+      if(this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaProdottaKgEttaro !=  this.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaProdottaKgEttaro) {
+        this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaProdottaKgEttaro  = this.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaProdottaKgEttaro;
+        resultUpdating = true;
+      }else {
+        resultUpdating = false;
+      }
+
+      if(this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaAsportataKgEttaro !=  this.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaAsportataKgEttaro) {
+        this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaAsportataKgEttaro  = this.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaAsportataKgEttaro;
+        resultUpdating = true;
+      }else {
+        resultUpdating = false;
+      }
+
+      if(this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviCarbonFootPrint.percentualeUmiditaGranella !=  this.datiProduttivi.datiProduttiviCarbonFootPrint.percentualeUmiditaGranella) {
+        this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviCarbonFootPrint.percentualeUmiditaGranella  = this.datiProduttivi.datiProduttiviCarbonFootPrint.percentualeUmiditaGranella;
+        resultUpdating = true;
+      }else {
+        resultUpdating = false;
+      }
+
+      if(this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviCarbonFootPrint.percentualeProteineGranella !=  this.datiProduttivi.datiProduttiviCarbonFootPrint.percentualeProteineGranella) {
+        this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviCarbonFootPrint.percentualeProteineGranella  = this.datiProduttivi.datiProduttiviCarbonFootPrint.percentualeProteineGranella;
+        resultUpdating = true;
+      }else {
+        resultUpdating = false;
+      }
+
       this.misurazione.inputMisurazione.residuiColturali = residuiColturali;
 
-      this.misurazione.dataOraUltimoAggiornamento = new Date().toUTCString();
+      if(resultUpdating) {
+        this.misurazione.dataOraUltimoAggiornamento = new Date().toUTCString();
+      }
+
+
       this.misurazioneService.salvaMisurazioneLocalStorage(this.misurazione);
       this.misurazioneService.updateMisurazione(
         this.misurazione.nomeMisurazione,

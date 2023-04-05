@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { ResultWaterFootprintPageRoutingModule } from './result-water-footprint-routing.module';
 
 import { ResultWaterFootprintPage } from './result-water-footprint.page';
+import {ButtonModule} from 'primeng/button';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    ButtonModule,
     ResultWaterFootprintPageRoutingModule
   ],
   declarations: [ResultWaterFootprintPage]

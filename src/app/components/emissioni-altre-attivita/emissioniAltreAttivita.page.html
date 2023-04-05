@@ -65,12 +65,22 @@
           <th class="t-header" pSortableColumn="numeroPassate">
             NumeroPassate <p-sortIcon field="price"></p-sortIcon>
           </th>
+
+          <th class="t-header" pSortableColumn="percentualeCaricoLavoro">
+            PercentualeCaricoLavoro<p-sortIcon field="name"></p-sortIcon>
+          </th>
+
+          <th class="t-header" pSortableColumn="Velocità">
+            Velocità<p-sortIcon field="name"></p-sortIcon>
+          </th>
+
           <th class="t-header" pSortableColumn="numeroPassate">
             KgCo2Ettaro <p-sortIcon field="price"></p-sortIcon>
           </th>
           <th class="t-header" pSortableColumn="numeroPassate">
             M3BlueWaterEttaro <p-sortIcon field="price"></p-sortIcon>
           </th>
+
           <th></th>
         </tr>
       </ng-template>
@@ -78,6 +88,8 @@
         <tr>
           <td class="btn-edit">{{emissioneAltraAttivita.operazione}}</td>
           <td class="btn-edit">{{emissioneAltraAttivita.numeroPassate}}</td>
+          <td class="btn-edit">{{emissioneAltraAttivita.caricoLavoro}}</td>
+          <td class="btn-edit">{{emissioneAltraAttivita.velocita}}</td>
           <td class="btn-edit">{{emissioneAltraAttivita.kgCo2Ettaro}}</td>
           <td class="btn-edit">{{emissioneAltraAttivita.m3BlueWaterEttaro}}</td>
 

@@ -11,6 +11,8 @@ export class EmissioneAltreAttivita {
   numeroPassate!: number;
   kgCo2Ettaro!: string;
   m3BlueWaterEttaro!:string;
+  velocita!:string;
+  caricoLavoro!:string;
   stimaConsumiDiesel!: StimaConsumiDiesel;
 }
 
@@ -100,6 +102,8 @@ export class StimaConsumiDiesel {
   getEmissioneAltreAttivita(numeroPassate: number, operazione: string): EmissioneAltreAttivita {
     let emissioneAltraAttivita: EmissioneAltreAttivita = new EmissioneAltreAttivita();
     emissioneAltraAttivita.stimaConsumiDiesel = this;
+    emissioneAltraAttivita.caricoLavoro = this.caricoLavoro.name;
+   emissioneAltraAttivita.velocita = this.velocita.name;
     emissioneAltraAttivita.operazione = operazione;
 
     emissioneAltraAttivita.numeroPassate = numeroPassate;
@@ -427,6 +431,7 @@ export class EmissioniAltreAttivitaPage {
       this.emissioniAltreAttivita.push(this.emissioneAltraAttivita);
       this.misurazione.inputMisurazione.operazioniColturali.emissioniAltreAttivita = this.emissioniAltreAttivita;
       this.misurazione.dataOraUltimoAggiornamento = new Date().toUTCString();
+
       this.misurazioneService.salvaMisurazioneLocalStorage(this.misurazione);
       this.misurazioneService.updateMisurazione(this.misurazione.nomeMisurazione,this.misurazione);
 

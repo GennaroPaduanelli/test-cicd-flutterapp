@@ -81,6 +81,14 @@ const routes: Routes = [
     path: 'emissioni-altre-attività',
     loadChildren: () => import('./components/emissioni-altre-attivita/emissioniAltreAttivita.module').then( m => m.EmissioniAltreAttivitaPageModule)
   },
+  {
+    path: 'carboon-footprint-line-chart',
+    loadChildren: () => import('./components/carboon-footprint-line-chart/carboon-footprint-line-chart.module').then( m => m.CarboonFootprintLineChartPageModule)
+  },
+  {
+    path: 'carboon-footprint-pie-chart',
+    loadChildren: () => import('./components/carboon-footprint-pie-chart/carboon-footprint-pie-chart.module').then( m => m.CarboonFootprintPieChartPageModule)
+  },
 
 ];
 

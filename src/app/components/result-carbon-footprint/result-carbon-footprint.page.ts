@@ -56,6 +56,7 @@ export class ResultCarbonFootprintPage {
     this.setDataOut();
   }
   setDataOut() {
+    this.totaleCfpUr = "0"
     if (
       this.misurazione.inputMisurazione.operazioniColturali &&
       this.misurazione.inputMisurazione.residuiColturali &&
@@ -158,26 +159,28 @@ export class ResultCarbonFootprintPage {
         this.sommaCfpUrLavorazioni = 'Non Calcolabile';
       }
 
-      if (
-        this.sommaCfpUrLavorazioni &&
-        this.sommaCfpUrAltreLavorazioni &&
-        this.sommaCfpUrPesticidi &&
-        this.sommaCfpUrFertilizzanti &&
-        this.sommaCfpUrResidui &&
-        this.sommaCfpUrEmissioniAltreAttivita
-      ) {
-        this.totaleCfpUr = (
-          parseFloat(this.sommaCfpUrLavorazioni) +
-          parseFloat(this.sommaCfpUrAltreLavorazioni) +
-          parseFloat(this.sommaCfpUrPesticidi) +
-          parseFloat(this.sommaCfpUrFertilizzanti) +
-          parseFloat(this.sommaCfpUrResidui) +
-          parseFloat(this.sommaCfpUrEmissioniAltreAttivita)
-        )
-          .toFixed(3)
-          .toString();
-      } else {
-        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+      if(this.sommaCfpUrLavorazioni && this.sommaCfpUrLavorazioni != 'Non Calcolabile') {
+        this.totaleCfpUr = (parseFloat(this.totaleCfpUr) +parseFloat(this.sommaCfpUrLavorazioni)).toFixed(3).toString();
+      }
+
+      if(this.sommaCfpUrAltreLavorazioni && this.sommaCfpUrAltreLavorazioni != 'Non Calcolabile') {
+        this.totaleCfpUr = (parseFloat(this.totaleCfpUr) +parseFloat(this.sommaCfpUrAltreLavorazioni)).toFixed(3).toString();
+      }
+
+      if(this.sommaCfpUrPesticidi && this.sommaCfpUrPesticidi != 'Non Calcolabile') {
+        this.totaleCfpUr = (parseFloat(this.totaleCfpUr) +parseFloat(this.sommaCfpUrPesticidi)).toFixed(3).toString();
+      }
+
+      if(this.sommaCfpUrFertilizzanti && this.sommaCfpUrFertilizzanti != 'Non Calcolabile') {
+        this.totaleCfpUr = (parseFloat(this.totaleCfpUr) +parseFloat(this.sommaCfpUrFertilizzanti)).toFixed(3).toString();
+      }
+
+      if(this.sommaCfpUrResidui && this.sommaCfpUrResidui != 'Non Calcolabile') {
+        this.totaleCfpUr = (parseFloat(this.totaleCfpUr) +parseFloat(this.sommaCfpUrResidui)).toFixed(3).toString();
+      }
+
+      if(this.sommaCfpUrEmissioniAltreAttivita && this.sommaCfpUrEmissioniAltreAttivita != 'Non Calcolabile') {
+        this.totaleCfpUr = (parseFloat(this.totaleCfpUr) +parseFloat(this.sommaCfpUrEmissioniAltreAttivita)).toFixed(3).toString();
       }
 
       if (this.totaleCfpUr && this.totaleCfpUr != 'Non Calcolabile') {
