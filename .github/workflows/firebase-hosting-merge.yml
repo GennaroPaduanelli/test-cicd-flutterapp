@@ -21,4 +21,4 @@ jobs:
       - name: Deploy on Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting --project sfof-revisited
+          args: deploy --only hosting --project sfof-revisited --token secrets.FIREBASE_SERVICE_ACCOUNT_SFOF_REVISITED
