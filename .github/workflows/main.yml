@@ -4,9 +4,9 @@ name: CI/CD
 # events but only for the master branch
 on:
   push:
-    branches: [master]
+    branches: main
   pull_request:
-    branches: [master]
+    branches: main
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # build job
@@ -45,7 +45,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
         with:
-          node-version: "10.x"
+          node-version: "18.x"
       # Install the dependencies need to build the app
       - name: Install Dependencies
         run: npm install
