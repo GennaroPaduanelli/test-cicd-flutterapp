@@ -22,6 +22,7 @@ export class OperazioniColturali {
     this.altreLavorazioni = [];
     this.pesticidi = [];
     this.fertilizzanti = [];
+    this.emissioniAltreAttivita = [];
   }
 }
 
@@ -216,10 +217,67 @@ export class InputMisurazione {
     this.residuiColturali = new ResiduiColturali(NaN, NaN, NaN);
     this.datiProduttivi = new DatiProduttivi();
     this.datiSuolo = new EvoluzioneCarbonio();
+
   }
 }
 
-export class OutputMisurazione {}
+export class OutputMisurazione {
+
+  outputCarbonFootPrint:OutputCarbonFootPrint;
+  ouputWaterFootPrint:OuputWaterFootPrint;
+
+
+}
+
+export class OutputCarbonFootPrint {
+  sommaCfpUrLavorazioni!: string;
+  sommaCfpUrAltreLavorazioni!: string;
+  sommaCfpUrPesticidi!: string;
+  sommaCfpUrFertilizzanti!: string;
+  sommaCfpUrResidui!: string;
+  sommaCfpUrEmissioniAltreAttivita!: string;
+  percentualeCfpLavorazioni!: string;
+  percentualeCfpAltreLavorazioni!: string;
+  percentualeCfpPesticidi!: string;
+  percentualeCfpFertilizzanti!: string;
+  percentualeCfpResidui!: string;
+  percentualeCfpEmissioniAltreAttivita!: string;
+  totaleCfpUr!: string;
+  pagliaAlSuoloKgEttaro!: string;
+  resaGranellaSeccaKgEttaro!: string;
+  proteineGranellaSeccaKgEttaro!: string;
+  kgCo2Ettaro!: string;
+  kgCo2PerKgGranella!: string;
+  kgCo2PerKgProteina!: string;
+  kgCo2PerKgAllocazioneGranella!: string;
+  asoc!: string;
+  systemExspansion!: string;
+}
+
+export class OuputWaterFootPrint {
+  sommaLavorazioniBlueWater!:string;
+  sommaAltreLavorazioniBlueWater!:string;
+  sommaPesticidiBlueWater!:string;
+  sommaFertilizzantiBlueWater!:string;
+  sommaEmissioniAltreAttivitaBlueWater!:string;
+
+
+  sommaTotaleBlueWater!:string;
+
+  percentualeLavorazioniBlueWaterFootPrint!:string;
+  percentualeAltreLavorazioniBlueWaterFootPrint!:string;
+  percentualePesticidiBlueWaterFootPrint!:string;
+  percentualeFertilizzantiBlueWaterFootPrint!:string;
+  percentualeEmissioniAltreAttivitaBlueWaterFootPrint!:string;
+
+  metriCubiGreenWaterKgGranella!:string;
+  metriCubiGreenWaterEttaro!:string;
+  metriCubiBlueWaterEttaro!:string;
+  metriCubiBlueWaterKgGranella!:string;
+
+  wfMetriCubiEttaro!:string;
+  wfiMetriCubiKgGranella!:string;
+}
 
 export class Misurazione {
   nomeMisurazione!: string;

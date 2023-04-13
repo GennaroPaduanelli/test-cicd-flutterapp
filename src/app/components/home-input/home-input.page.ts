@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MisurazioneService } from 'src/app/services/misurazione.service';
 
 @Component({
   selector: 'app-home-input',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeInputPage implements OnInit {
 
-  constructor() { }
-
+  constructor(private misurazioneService:MisurazioneService) { }
+  misurazioneExists = false;
+  misurazioneName = '';
   ngOnInit() {
+    let misurazione = this.misurazioneService.getMisurazioneLocalStorage();
+    if(misurazione != undefined ) {
+      if(misurazione.nomeMisurazione != undefined && misurazione.nomeMisurazione != '') {
+        this.misurazioneExists = true;
+        this.misurazioneName = misurazione.nomeMisurazione;
+      }
+
+
+    }
   }
 
 }

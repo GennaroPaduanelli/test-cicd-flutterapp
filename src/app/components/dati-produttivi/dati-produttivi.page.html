@@ -15,22 +15,25 @@
         placeholder="Resa Granella KgEttaro"
         [min]="0"
         [required]="true"
+        (ngModelChange)="onChangeResaGranellaKgEttaro($event)"
       ></p-inputNumber>
     </div>
     <br />
 
     <div class="p-field input-class">
-      <label for="pagliaProdottaKgEttaro" style="color: white"
-        >Paglia Prodotta KgEttaro (Modifica se Errato)</label
+      <label for="percentualeUmiditaGranella" style="color: white"
+        >Umidità Granella %</label
       >
       <p-inputNumber
         class="data-input"
-        id="pagliaProdottaKgEttaro"
-        [(ngModel)]="datiProduttivi.datiProduttiviCarbonFootPrint.pagliaProdottaKgEttaro"
+        id="percentualeUmiditaGranella"
+        [(ngModel)]="datiProduttivi.datiProduttiviCarbonFootPrint.percentualeUmiditaGranella"
         [showButtons]="true"
-        placeholder="Paglia Prodotta KgEttaro"
+        placeholder="Umidità Granella %"
         [min]="0"
+        [max]="100"
         [required]="true"
+        (ngModelChange)="onChangePercentualeUmiditaGranella($event)"
       ></p-inputNumber>
     </div>
     <br />
@@ -46,27 +49,31 @@
         [showButtons]="true"
         placeholder="Paglia Asportata KgEttaro"
         [min]="0"
-
+        (ngModelChange)="onChangePagliaAsportataKgEttaro($event)"
         [required]="true"
       ></p-inputNumber>
     </div>
     <br />
+
+
     <div class="p-field input-class">
-      <label for="percentualeUmiditaGranella" style="color: white"
-        >Umidità Granella %</label
+      <label for="pagliaProdottaKgEttaro" style="color: white"
+        >Paglia Prodotta KgEttaro(Modifica se Errato)</label
       >
       <p-inputNumber
         class="data-input"
-        id="percentualeUmiditaGranella"
-        [(ngModel)]="datiProduttivi.datiProduttiviCarbonFootPrint.percentualeUmiditaGranella"
+        id="pagliaProdottaKgEttaro"
+        [(ngModel)]="datiProduttivi.datiProduttiviCarbonFootPrint.pagliaProdottaKgEttaro"
         [showButtons]="true"
-        placeholder="Umidità Granella %"
-        [min]="0"
-        [max]="100"
+        placeholder="Paglia Prodotta KgEttaro"
         [required]="true"
+        [min]="0"
       ></p-inputNumber>
     </div>
     <br />
+
+
+
 
     <div class="p-field input-class">
       <label for="percentualeProteineGranella" style="color: white"

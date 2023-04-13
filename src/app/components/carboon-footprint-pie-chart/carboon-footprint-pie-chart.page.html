@@ -1,9 +1,28 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>carboon-footprint-pie-chart</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="container">
+  <div class="form">
+    <h2 class="title">CFP %</h2>
+    <br />
 
-<ion-content>
-
-</ion-content>
+    <ngx-charts-advanced-pie-chart
+      style="fill: white"
+      [results]="data"
+      [view]="view"
+      [scheme]="colorScheme"
+      [tooltipDisabled]= "false"
+      [gradient]="gradient"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+    >
+    </ngx-charts-advanced-pie-chart
+    ><br /><br />
+    
+    <button
+      class="back-btn"
+      pButton
+      type="button"
+      icon="pi pi-arrow-left"
+      routerLink="/result-carbon-footprint"
+    ></button>
+  </div>
+</div>

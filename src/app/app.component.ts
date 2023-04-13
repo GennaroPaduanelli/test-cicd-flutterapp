@@ -6,7 +6,7 @@ import { UserLocalStorageService } from './services/user.localStorage.service';
 import { User } from './services/user.service';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { MisurazioneService } from './services/misurazione.service';
+import { Misurazione, MisurazioneService } from './services/misurazione.service';
 import { getAnalytics } from "firebase/analytics";
 @Component({
   selector: 'app-root',
@@ -40,17 +40,52 @@ const analytics = getAnalytics(app);
 
     setData() {
       this.items = [];
-      this.items.push({label: 'Home', icon: 'pi pi-home',url: '/home',target:"_self",styleClass: this.isActive(['/home-input'])});
+      this.items.push({label: 'Misurazioni', icon: 'pi pi-chevron-circle-right',url: '/home',target:"_self",styleClass: this.isActive(['/home-input'])});
 
       let user: User = this.localStorageServiceUser.getUser();
+      let misurazione:Misurazione = this.misurazioniService.getMisurazioneLocalStorage();
 
       if(user != undefined) {
-        this.items.push({label: 'OperazioniColturali', icon: 'pi pi-chevron-circle-right',url: '/lavorazioni',target:"_self",  styleClass: this.isActive(['/lavorazioni'])});
-        this.items.push({label: 'DatiProduttivi', icon: 'pi pi-chevron-circle-right',url: '/dati-produttivi',target:"_self",  styleClass: this.isActive(['/dati-produttivi'])});
+        this.items.push({label: 'OperazioniColturali', icon: 'pi pi-chevron-circle-right',target:"_self",  styleClass: this.isActive(['/lavorazioni']), command : ()=> {
+          if(misurazione == undefined ) {
+            this.navController.navigateForward('home-input');
+          }else {
+            this.navController.navigateForward('lavorazioni');
+          }
 
-        this.items.push({label: 'Dati Soulo', icon: 'pi pi-chevron-circle-right',url: '/evoluzione-carbonio-suolo',target:"_self",  styleClass: this.isActive(['/evoluzione-carbonio-suolo'])});
-        this.items.push({label: 'Seleziona Calcolo', icon: 'pi pi-chevron-circle-right',url: '/operation-selection',target:"_self",  styleClass: this.isActive(['/operation-selection'])});
-        this.items.push({label: `${user.nome} ${user.cognome}`, icon: 'pi pi-user',items:[{label: 'Cambia Password', icon: 'pi pi-user-edit',  url:'/change-password' ,target:"_self",  styleClass: this.isActive(['/login'])},
+
+        }});
+        this.items.push({label: 'DatiProduttivi', icon: 'pi pi-chevron-circle-right',target:"_self",  styleClass: this.isActive(['/dati-produttivi']) , command : ()=>{
+          if(misurazione == undefined ) {
+            this.navController.navigateForward('home-input');
+          }else {
+            this.navController.navigateForward('dati-produttivi');
+          }
+        }});
+
+        this.items.push({label: 'Dati Soulo', icon: 'pi pi-chevron-circle-right',target:"_self",  styleClass: this.isActive(['/evoluzione-carbonio-suolo']),command : ()=> {
+          if(misurazione == undefined ) {
+            this.navController.navigateForward('home-input');
+          }else {
+            this.navController.navigateForward('evoluzione-carbonio-suolo');
+          }
+        }});
+        this.items.push({label: 'Seleziona Calcolo', icon: 'pi pi-chevron-circle-right',target:"_self",  styleClass: this.isActive(['/operation-selection']), command : ()=> {
+          if(misurazione == undefined ) {
+            this.navController.navigateForward('home-input');
+          }else {
+
+
+              this.navController.navigateForward('operation-selection').then( ()=> {
+                location.reload();
+              })
+
+
+
+          }
+        }});
+        //{label: 'Cambia Password', icon: 'pi pi-user-edit',  url:'/change-password' ,target:"_self",  styleClass: this.isActive(['/login'])}
+        this.items.push({label: `${user.nome} ${user.cognome}`, icon: 'pi pi-user',items:[
         {label: 'Logout', icon: 'pi pi-sign-out' , command: () => {this.logout()}}
       ]});
 

@@ -6,7 +6,7 @@
 
         <button pButton pRipple  icon="pi pi-plus" class="p-button-success p-mr-2" (click)="apriModale()"></button>&nbsp;
         <button pButton pRipple  icon="pi pi-arrow-left" class="p-button-primary p-mr-2"  routerLink="/pesticidi"></button>&nbsp;
-        <button pButton pRipple  icon="pi pi-arrow-right" class="p-button-primary p-mr-2" [disabled]="!fertilizzanti.length" routerLink="/emissioni-altre-attività" ></button>&nbsp;
+        <button pButton pRipple  icon="pi pi-arrow-right" class="p-button-primary p-mr-2"  routerLink="/emissioni-altre-attività" ></button>&nbsp;
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
           <input pInputText type="text"  class="txt-search" (input)="applyFilterGlobal($event, 'contains')" placeholder="Ricerca..." />
@@ -83,7 +83,7 @@
     <div class="p-field">
       <label for="numeroPassate">PercentualeAzoto</label>
 
-      <p-inputNumber [(ngModel)]="selectedPercentualeAzoto" [showButtons]="true" [min]="0.1" [required]="true"></p-inputNumber>
+      <p-inputNumber [(ngModel)]="selectedPercentualeAzoto" [showButtons]="true" step=".1"[required]="true"></p-inputNumber>
 
 
   </div><br>

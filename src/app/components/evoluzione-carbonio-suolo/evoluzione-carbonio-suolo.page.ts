@@ -21,6 +21,8 @@ export class EvoluzioneCarbonioSuoloPage implements OnInit {
   selectedDensitaApparenteInput:any = 0.9;
   selectedSostanzaOrganicaInput:any = 0.6;
 
+  selectedProfondita!:any;
+
   isTextInputDensitaApparente = false;
   isTextInputSostanzaOrganica = false;
   constructor(private misurazioneService: MisurazioneService ) {
@@ -32,7 +34,9 @@ export class EvoluzioneCarbonioSuoloPage implements OnInit {
       if(Object.keys(this.misurazione?.inputMisurazione.datiSuolo).length !== 0) {
 
         this.evoluzioneCarbonio = this.misurazione?.inputMisurazione.datiSuolo;
-
+        if(this.misurazione.inputMisurazione.datiSuolo.profondita && !isNaN(this.misurazione.inputMisurazione.datiSuolo.profondita)) {
+        this.selectedProfondita = this.misurazione.inputMisurazione.datiSuolo.profondita;
+        }
 
         switch(this.evoluzioneCarbonio.densitaApparente) {
           case 1.55:
@@ -111,12 +115,55 @@ export class EvoluzioneCarbonioSuoloPage implements OnInit {
     if(Object.keys(this.evoluzioneCarbonio).length != 0) {
 
 
+
+      let updating  = false;
+
+      if(this.misurazione.inputMisurazione.datiSuolo.profondita != this.selectedProfondita) {
+        updating = true;
+      }
+
+      if(this.isTextInputDensitaApparente) {
+        if(this.misurazione.inputMisurazione.datiSuolo.densitaApparente != this.selectedDensitaApparenteInput) {
+          updating = true;
+        }
+      }else {
+        if(this.misurazione.inputMisurazione.datiSuolo.densitaApparente != this.selectedDensitaApparenteDropDown.code) {
+          updating = true;
+        }
+      }
+
+
+
+
+
+      if(this.isTextInputSostanzaOrganica) {
+        if(this.misurazione.inputMisurazione.datiSuolo.sostanzaOrganica != this.selectedSostanzaOrganicaInput) {
+          updating = true;
+        }
+      }else {
+        if(this.misurazione.inputMisurazione.datiSuolo.sostanzaOrganica != this.selectedSostanzaOrganicaDropDown.code) {
+          updating = true;
+        }
+      }
+
+
+
+
+
+
       this.misurazione.inputMisurazione.datiSuolo = this.evoluzioneCarbonio;
+      this.misurazione.inputMisurazione.datiSuolo.profondita = this.selectedProfondita;
       this.misurazione.inputMisurazione.datiSuolo.densitaApparente = this.isTextInputDensitaApparente ? this.selectedDensitaApparenteInput: this.selectedDensitaApparenteDropDown.code;
       this.misurazione.inputMisurazione.datiSuolo.sostanzaOrganica = this.isTextInputSostanzaOrganica ? this.selectedSostanzaOrganicaInput: this.selectedSostanzaOrganicaDropDown.code;
-      this.misurazione.dataOraUltimoAggiornamento = new Date().toUTCString();
+
+
+      if(updating) {
+        this.misurazione.dataOraUltimoAggiornamento = new Date().toUTCString();
+      }
+
       this.misurazioneService.salvaMisurazioneLocalStorage(this.misurazione);
       this.misurazioneService.updateMisurazione(this.misurazione.nomeMisurazione,this.misurazione);
+
 
     }
   }

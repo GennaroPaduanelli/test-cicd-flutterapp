@@ -4,6 +4,8 @@ import { NavController } from '@ionic/angular';
 import {
   Misurazione,
   MisurazioneService,
+  OutputCarbonFootPrint,
+  OutputMisurazione,
 } from 'src/app/services/misurazione.service';
 
 @Component({
@@ -13,6 +15,7 @@ import {
 })
 export class ResultCarbonFootprintPage {
   misurazione!: Misurazione;
+  isActiveGraph = false;
 
   sommaCfpUrLavorazioni!: string;
   sommaCfpUrAltreLavorazioni!: string;
@@ -57,13 +60,7 @@ export class ResultCarbonFootprintPage {
   }
   setDataOut() {
     this.totaleCfpUr = "0"
-    if (
-      this.misurazione.inputMisurazione.operazioniColturali &&
-      this.misurazione.inputMisurazione.residuiColturali &&
-      this.misurazione.inputMisurazione.residuiColturali.granellaKgEttaro &&
-      this.misurazione.inputMisurazione.residuiColturali.percentualeUmidita &&
-      this.misurazione.inputMisurazione.residuiColturali.pagliaRimossaKgEttaro
-    ) {
+
       if (
         this.misurazione.inputMisurazione.operazioniColturali.lavorazioni
           .length > 0
@@ -93,7 +90,7 @@ export class ResultCarbonFootprintPage {
             )
             .toString();
       } else {
-        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+        this.sommaCfpUrAltreLavorazioni = 'Non Calcolabile';
       }
 
       if (
@@ -109,7 +106,7 @@ export class ResultCarbonFootprintPage {
             )
             .toString();
       } else {
-        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+        this.sommaCfpUrPesticidi = 'Non Calcolabile';
       }
 
       if (
@@ -125,7 +122,7 @@ export class ResultCarbonFootprintPage {
             )
             .toString();
       } else {
-        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+        this.sommaCfpUrFertilizzanti = 'Non Calcolabile';
       }
 
       if (
@@ -141,9 +138,10 @@ export class ResultCarbonFootprintPage {
           .toFixed(3)
           .toString();
       } else {
-        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+        this.sommaCfpUrResidui = 'Non Calcolabile';
       }
-      if (
+      if (this.misurazione.inputMisurazione.operazioniColturali
+        .emissioniAltreAttivita &&
         this.misurazione.inputMisurazione.operazioniColturali
           .emissioniAltreAttivita.length > 0
       ) {
@@ -156,7 +154,7 @@ export class ResultCarbonFootprintPage {
             )
             .toString();
       } else {
-        this.sommaCfpUrLavorazioni = 'Non Calcolabile';
+        this.sommaCfpUrEmissioniAltreAttivita = 'Non Calcolabile';
       }
 
       if(this.sommaCfpUrLavorazioni && this.sommaCfpUrLavorazioni != 'Non Calcolabile') {
@@ -415,11 +413,67 @@ export class ResultCarbonFootprintPage {
       } else {
         this.systemExspansion = 'Non Calcolabile';
       }
-    }
+
+      if( this.misurazione.outputMisurazione == undefined) {
+        this.misurazione.outputMisurazione = new OutputMisurazione();
+        }
+        if( this.misurazione.outputMisurazione.outputCarbonFootPrint == undefined)  {
+          this.misurazione.outputMisurazione.outputCarbonFootPrint = new OutputCarbonFootPrint();
+        }
+
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.sommaCfpUrLavorazioni = this.sommaCfpUrLavorazioni;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.sommaCfpUrAltreLavorazioni = this.sommaCfpUrAltreLavorazioni;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.sommaCfpUrPesticidi = this.sommaCfpUrPesticidi;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.sommaCfpUrFertilizzanti = this.sommaCfpUrFertilizzanti;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.sommaCfpUrResidui = this.sommaCfpUrResidui;
+
+
+
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.sommaCfpUrEmissioniAltreAttivita = this.sommaCfpUrEmissioniAltreAttivita;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.percentualeCfpLavorazioni = this.percentualeCfpLavorazioni;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.percentualeCfpAltreLavorazioni = this.percentualeCfpAltreLavorazioni;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.percentualeCfpPesticidi = this.percentualeCfpPesticidi;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.percentualeCfpFertilizzanti = this.percentualeCfpFertilizzanti;
+
+
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.percentualeCfpResidui = this.percentualeCfpResidui;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.percentualeCfpEmissioniAltreAttivita = this.percentualeCfpEmissioniAltreAttivita;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.totaleCfpUr = this.totaleCfpUr;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.pagliaAlSuoloKgEttaro = this.pagliaAlSuoloKgEttaro;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.resaGranellaSeccaKgEttaro = this.resaGranellaSeccaKgEttaro;
+
+
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.proteineGranellaSeccaKgEttaro = this.proteineGranellaSeccaKgEttaro;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.kgCo2Ettaro = this.kgCo2Ettaro;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.kgCo2PerKgGranella = this.kgCo2PerKgGranella;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.kgCo2PerKgProteina = this.kgCo2PerKgProteina;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.kgCo2PerKgAllocazioneGranella = this.kgCo2PerKgAllocazioneGranella;
+
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.asoc = this.asoc;
+        this.misurazione.outputMisurazione.outputCarbonFootPrint.systemExspansion = this.systemExspansion;
+
+        this.misurazioneService.salvaMisurazioneLocalStorage(this.misurazione);
+        this.misurazioneService.updateMisurazione(this.misurazione.nomeMisurazione, this.misurazione);
+
+        if(this.misurazione.outputMisurazione.outputCarbonFootPrint.systemExspansion&&
+          this.misurazione.outputMisurazione.outputCarbonFootPrint.kgCo2PerKgAllocazioneGranella&&
+          this.misurazione.outputMisurazione.outputCarbonFootPrint.kgCo2PerKgGranella&&
+          this.misurazione.outputMisurazione.outputCarbonFootPrint.systemExspansion != 'Non Calcolabile'&&
+          this.misurazione.outputMisurazione.outputCarbonFootPrint.kgCo2PerKgAllocazioneGranella != 'Non Calcolabile'&&
+          this.misurazione.outputMisurazione.outputCarbonFootPrint.kgCo2PerKgGranella != 'Non Calcolabile'
+          ) {
+          this.isActiveGraph = true;
+        }else{this.isActiveGraph = false;}
+
   }
 
   nextPage() {
+
+    if(this.isSecondPage) {
+      this.navCtrl.navigateForward('home-input');
+    }
     this.isSecondPage = true;
+
   }
 
   backPage() {
@@ -428,5 +482,10 @@ export class ResultCarbonFootprintPage {
     } else {
       this.navCtrl.navigateForward('home-input');
     }
+  }
+  goToChartSystemExspansion() {
+    this.navCtrl.navigateForward('carboon-footprint-line-chart').then(()=> {
+      window.location.reload();
+    })
   }
 }

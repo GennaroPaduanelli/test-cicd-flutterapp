@@ -4,6 +4,7 @@ import { Misurazione, MisurazioneService } from 'src/app/services/misurazione.se
 import * as moment from "moment";
 import { Router } from '@angular/router';
 import { convertToPrintableDate } from 'src/app/services/timeUtils';
+import { NavController } from '@ionic/angular';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class MisurazioniPage  {
 
 
   @ViewChild('dt') dt: Table | undefined;
-  constructor(private misurazioneService :MisurazioneService, private router:Router) {
+  constructor(private misurazioneService :MisurazioneService, private navCtrl:NavController) {
 
     this.misurazioneService.getAllMisurazioni().valueChanges().subscribe(data => {this.misurazioni = data});
   }
@@ -123,7 +124,9 @@ export class MisurazioniPage  {
 goToHomeInput(misurazione: Misurazione) {
 
   this.misurazioneService.salvaMisurazioneLocalStorage(misurazione);
-  this.router.navigate(['/home-input']);
+  this.navCtrl.navigateForward('home-input').then(()=> {
+    location.reload();
+  });
 }
 
 

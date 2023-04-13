@@ -90,6 +90,15 @@ const routes: Routes = [
     loadChildren: () => import('./components/carboon-footprint-pie-chart/carboon-footprint-pie-chart.module').then( m => m.CarboonFootprintPieChartPageModule)
   },
 
+  {
+    path: 'water-footprint-line-chart',
+    loadChildren: () => import('./components/water-footprint-line-chart/water-footprint-line-chart.module').then( m => m.WaterFootprintLineChartPageModule)
+  },
+  {
+    path: 'water-footprint-pie-chart',
+    loadChildren: () => import('./components/water-footprint-pie-chart/water-footprint-pie-chart.module').then( m => m.WaterFootprintPieChartPageModule)
+  },
+
 ];
 
 @NgModule({

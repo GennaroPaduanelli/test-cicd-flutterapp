@@ -91,6 +91,9 @@ export class DatiProduttiviPage implements OnInit {
         this.datiProduttivi.datiProduttiviWaterFootPrint =
           this.misurazione.inputMisurazione.datiProduttivi.datiProduttiviWaterFootPrint;
       }
+
+      this.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaProdottaKgEttaro =  this.misurazione.inputMisurazione.residuiColturali.agDmtNumberKgAnno;
+
     }
   }
 
@@ -169,4 +172,29 @@ export class DatiProduttiviPage implements OnInit {
       );
     }
   }
+  onChangeResaGranellaKgEttaro(event) {
+    this.updatePagliaProdotta();
+  }
+  onChangePercentualeUmiditaGranella(event) {
+    this.updatePagliaProdotta();
+  }
+  onChangePagliaAsportataKgEttaro(event) {
+
+    this.updatePagliaProdotta();
+  }
+
+  updatePagliaProdotta() {
+    if(this.datiProduttivi.datiProduttiviCarbonFootPrint.resaGranellaKgEttaro != null
+      && this.datiProduttivi.datiProduttiviCarbonFootPrint.percentualeUmiditaGranella != null
+      && this.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaAsportataKgEttaro != null
+      ) {
+        let residuiColturali: ResiduiColturali = new ResiduiColturali(
+          this.datiProduttivi.datiProduttiviCarbonFootPrint.resaGranellaKgEttaro,
+          this.datiProduttivi.datiProduttiviCarbonFootPrint.percentualeUmiditaGranella,
+          this.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaAsportataKgEttaro
+        );
+        this.datiProduttivi.datiProduttiviCarbonFootPrint.pagliaProdottaKgEttaro = residuiColturali.agDmtNumberKgAnno;
+    }
+  }
 }
+
