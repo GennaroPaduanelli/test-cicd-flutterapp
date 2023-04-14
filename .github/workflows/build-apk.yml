@@ -49,7 +49,7 @@ jobs:
         run: npx ionic capacitor copy android && npx cap sync android
         
       - name: Build final APK Gradlew
-        run: cd android && sudo ./gradlew assembleDebug
+        run: cd android && chmod +x gradlew && ./gradlew assembleDebug
 
       - name: Upload dev APK
         uses: actions/upload-artifact@v1
