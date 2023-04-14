@@ -31,19 +31,6 @@ jobs:
 
       - name: Add Android platform
         run: ionic capacitor platform add android@latest
-
-      #- name: Build Android Dev APK
-       # run: ionic capacitor build android
-
-      #- name: Build Android Release APK
-       # run: ionic capacitor build android --release --prod
-
-      #- name: Generate the Android App Bundle
-        #working-directory: ./platforms/android/
-        #run: ./gradlew bundle
-        
-     # - name: Jetify Install
-     #   run: npx jetify
         
       - name: Create android build folder
         run: npx ionic capacitor copy android && npx cap sync android
@@ -51,17 +38,6 @@ jobs:
       - name: Build final APK Gradlew
         run: cd android && chmod +x gradlew && ./gradlew assembleDebug
 
-      - name: Upload dev APK
-        uses: actions/upload-artifact@v1
-        with:
-          name: app-dev
-          path: android/app/build/outputs/apk/debug/app-debug.apk
-
-#       - name: Upload release bundle
-#         uses: actions/upload-artifact@v1
-#         with:
-#           name: app-release
-#           path: android/app/build/outputs/bundle/release/app.apk
       - name: Zip
         run: zip -r /tmp/sfof_apk.zip /home/runner/work
         shell: bash
