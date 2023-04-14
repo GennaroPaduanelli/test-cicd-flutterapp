@@ -42,8 +42,8 @@ jobs:
         #working-directory: ./platforms/android/
         #run: ./gradlew bundle
         
-      - name: Jetify Install
-        run: npx jetify
+     # - name: Jetify Install
+     #   run: npx jetify
         
       - name: Create android build folder
         run: npx ionic capacitor copy android && npx cap sync android
