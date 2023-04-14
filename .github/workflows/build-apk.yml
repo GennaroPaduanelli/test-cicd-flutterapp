@@ -1,8 +1,6 @@
 name: Build source code on android
-on:
-  push:
-    tags:
-      - '*'
+on: [push, pull_request]
+
 jobs:
   build_android:
     runs-on: ubuntu-latest
