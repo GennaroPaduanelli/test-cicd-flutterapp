@@ -46,9 +46,4 @@ jobs:
           asset_name: app-debug.apk
           tag_name: ${{ steps.next.outputs.version }}
           release_name: Release ${{ steps.next.outputs.version }}
-          overwrite: true
-          body: "sfof_apk"
-
-
-
-          
+          overwrite: true         
