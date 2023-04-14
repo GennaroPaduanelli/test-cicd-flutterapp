@@ -1,64 +1,35 @@
-name: Build Android
-
-on: [push, pull_request]
-
+name: Build source code on android
+on:
+  push:
+    tags:
+      - '*'
 jobs:
-  build:
-    name: Build APK
+  build_android:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+      - name: Install dependencies
+        id: install_code
+        run: npm ci
+      - name: Build
+        id: build_code
+        run: npm run build
+      - name: Sync
+        id: sync_code
+        run: npx cap sync
       - name: Setup java
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
-          java-version: 11
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
-        with:
-          node-version: 18.x
-
-      - name: Install capacitor
-        run: npm install -g capacitor
-
-      - name: Install Ionic
-        run: npm install -g @ionic/cli
-
-      - name: Install app dependencies
-        run: npm install
-
-      - name: Add Android platform
-        run: ionic capacitor platform add android@latest
-
-      #- name: Build Android Dev APK
-       # run: ionic capacitor build android
-
-      #- name: Build Android Release APK
-       # run: ionic capacitor build android --release --prod
-
-      #- name: Generate the Android App Bundle
-        #working-directory: ./platforms/android/
-        #run: ./gradlew bundle
-        
-     # - name: Jetify Install
-     #   run: npx jetify
-        
-      - name: Create android build folder
-        run: npx ionic capacitor copy android && npx cap sync android
-        
-      - name: Build final APK Gradlew
-        run: cd android && chmod +x gradlew && ./gradlew assembleDebug
-
-      - name: Upload dev APK
-        uses: actions/upload-artifact@v1
-        with:
-          name: app-dev
-          path: android/app/build/outputs/apk/debug/app-debug.apk
-
+          distribution: zulu
+          java-version: '11'
       - name: Upload release bundle
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
-          name: app-release
-          path: android/app/build/outputs/bundle/release/app.apk
+          name: android-release
+          path: ./android/app/build/outputs/bundle/release/app-release.aab
+          retention-days: 60
