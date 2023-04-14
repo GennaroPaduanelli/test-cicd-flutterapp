@@ -66,15 +66,15 @@ jobs:
         run: zip -r /tmp/sfof_apk.zip /home/runner/work
         shell: bash
       - name: Upload binaries to release
-#         uses: svenstaro/upload-release-action@v2
-#         with:
-#           repo_token: ${{ secrets.GITHUB_TOKEN }}
-#           file: /tmp/sfof_apk.zip
-#           asset_name: sfof_apk.zip
-#           tag: ${{ github.ref }}
-#           overwrite: true
-#           body: "sfof_apk"
-        run: cd /tmp/ && ls
-        shell: bash
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: /tmp/sfof_apk.zip
+          asset_name: sfof_apk.zip
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "sfof_apk"
+
+
 
           
