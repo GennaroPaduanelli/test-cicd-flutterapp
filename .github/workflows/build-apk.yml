@@ -75,5 +75,6 @@ jobs:
 #           overwrite: true
 #           body: "sfof_apk"
         run: cd /tmp/ && ls
+        shell: bash
 
           
