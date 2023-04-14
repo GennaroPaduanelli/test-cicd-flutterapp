@@ -38,15 +38,15 @@ jobs:
       - name: Build final APK Gradlew
         run: cd android && chmod +x gradlew && ./gradlew assembleDebug
 
-      - name: Zip
-        run: zip -r /tmp/sfof_apk.zip /home/runner/work
-        shell: bash
+#       - name: Zip
+#         run: zip -r /tmp/sfof_apk.zip home/runner/work/test-cicd-flutterapp/test-cicd-flutterapp/android/app/build/outputs/apk/debug/app-debug.apk
+#         shell: bash
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /tmp/sfof_apk.zip
-          asset_name: sfof_apk.zip
+          file: /home/runner/work/test-cicd-flutterapp/test-cicd-flutterapp/android/app/build/outputs/apk/debug/app-debug.apk
+          asset_name: app-debug.apk
           tag: ${{ github.ref }}
           overwrite: true
           body: "sfof_apk"
